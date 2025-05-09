@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu-Log | Track Your Learning Journey</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+</head>
+<body>
+    <header>
+        <div class="container" style="background-image: url('https://img.freepik.com/premium-photo/laptop-rests-blue-desk-surrounded-by-various-textbooks-showcasing-blend-traditional-digital-learning-methods-generative-ai_262708-31032.jpg?ga=GA1.1.948412924.1746160226&semt=ais_hybrid&w=740'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            <div class="logo">
+                <h1>Edu-Log</h1>
+                <p>Track Your Learning Journey</p>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="active">Dashboard</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <button id="theme-toggle" style="margin: 10px 55px;">🌙</button>
+            </nav>
+            <button id="mobile-menu-toggle" class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="stats">
+            <div class="stat-card">
+                <h3>Total Hours</h3>
+                <p id="total-hours">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Total Entries</h3>
+                <p id="total-entries">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>This Week</h3>
+                <p id="week-hours">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Streak</h3>
+                <p id="streak-days">0 days</p>
+            </div>
+        </section>
+
+        <div class="dashboard-grid">
+            <section class="entry-form">
+                <div class="section-header">
+                    <h2>Log Your Learning</h2>
+                    <button id="start-timer-btn" class="btn-secondary">Start Timer</button>
+                </div>
+                <form id="log-form">
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" required placeholder="e.g., Mathematics, Programming">
+                    </div>
+                    <div class="form-group">
+                        <label for="topic">Topic</label>
+                        <input type="text" id="topic" required placeholder="e.g., Calculus, JavaScript">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="duration">Duration (hours)</label>
+                            <input type="number" id="duration" min="0.1" step="0.1" required placeholder="1.5">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category">
+                            <option value="study">Study Session</option>
+                            <option value="practice">Practice</option>
+                            <option value="project">Project Work</option>
+                            <option value="review">Review/Revision</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Notes</label>
+                        <textarea id="notes" rows="3" placeholder="What did you learn? Any key insights?"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Log Entry</button>
+                </form>
+            </section>
+
+            <section class="goals-section">
+                <div class="section-header">
+                    <h2>Learning Goals</h2>
+                    <button id="add-goal-btn" class="btn-secondary">Add Goal</button>
+                </div>
+                <div id="goals-list" class="goals-list">
+                    <!-- Goals will be added here dynamically -->
+                    <p class="empty-state">No goals set. Add your first learning goal!</p>
+                </div>
+            </section>
+        </div>
+
+        <section class="entries">
+            <div class="entries-header">
+                <h2>Learning Entries</h2>
+                <div class="view-toggle">
+                    <button id="list-view-btn" class="view-btn active">List</button>
+                    <button id="calendar-view-btn" class="view-btn">Calendar</button>
+                </div>
+            </div>
+            <div class="filter-bar">
+                <input type="text" id="search" placeholder="Search entries...">
+                <select id="filter-subject">
+                    <option value="">All Subjects</option>
+                </select>
+                <select id="filter-category">
+                    <option value="">All Categories</option>
+                    <option value="study">Study Session</option>
+                    <option value="practice">Practice</option>
+                    <option value="project">Project Work</option>
+                    <option value="review">Review/Revision</option>
+                    <option value="other">Other</option>
+                </select>
+                <select id="filter-time">
+                    <option value="">All Time</option>
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                </select>
+            </div>
+            <div id="entries-list" class="entries-list">
+                <!-- Entries will be added here dynamically -->
+                <p class="empty-state">No entries yet. Start logging your learning journey!</p>
+            </div>
+            <div id="calendar-view" class="calendar-view hidden">
+                <!-- Calendar will be rendered here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Edu-Log</h3>
+                    <p>Track your educational progress in real-time.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Dashboard</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Edu-Log. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="entry-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Edit Entry</h2>
+            <form id="edit-form">
+                <input type="hidden" id="edit-id">
+                <div class="form-group">
+                    <label for="edit-subject">Subject</label>
+                    <input type="text" id="edit-subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-topic">Topic</label>
+                    <input type="text" id="edit-topic" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="edit-date">Date</label>
+                        <input type="date" id="edit-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-duration">Duration (hours)</label>
+                        <input type="number" id="edit-duration" min="0.1" step="0.1" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="edit-category">Category</label>
+                    <select id="edit-category">
+                        <option value="study">Study Session</option>
+                        <option value="practice">Practice</option>
+                        <option value="project">Project Work</option>
+                        <option value="review">Review/Revision</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-notes">Notes</label>
+                    <textarea id="edit-notes" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                    <button type="button" id="delete-entry" class="btn-danger">Delete Entry</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="goal-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Add Learning Goal</h2>
+            <form id="goal-form">
+                <input type="hidden" id="goal-id">
+                <div class="form-group">
+                    <label for="goal-title">Goal Title</label>
+                    <input type="text" id="goal-title" required placeholder="e.g., Complete JavaScript Course">
+                </div>
+                <div class="form-group">
+                    <label for="goal-description">Description</label>
+                    <textarea id="goal-description" rows="2" placeholder="Describe your goal..."></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="goal-target-hours">Target Hours</label>
+                        <input type="number" id="goal-target-hours" min="1" step="1" required placeholder="40">
+                    </div>
+                    <div class="form-group">
+                        <label for="goal-deadline">Deadline</label>
+                        <input type="date" id="goal-deadline">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="goal-subject">Related Subject</label>
+                    <input type="text" id="goal-subject" placeholder="e.g., Programming">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Save Goal</button>
+                    <button type="button" id="delete-goal" class="btn-danger hidden">Delete Goal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="timer-modal" class="modal">
+        <div class="modal-content timer-content">
+            <span class="close-modal">&times;</span>
+            <h2>Study Timer</h2>
+            <div class="timer-display">
+                <span id="timer-hours">00</span>:<span id="timer-minutes">00</span>:<span id="timer-seconds">00</span>
+            </div>
+            <div class="timer-controls">
+                <button id="timer-start" class="btn-primary">Start</button>
+                <button id="timer-pause" class="btn-secondary" disabled>Pause</button>
+                <button id="timer-reset" class="btn-outline" disabled>Reset</button>
+            </div>
+            <div class="timer-info">
+                <p>Subject: <span id="timer-subject">Not set</span></p>
+                <p>Topic: <span id="timer-topic">Not set</span></p>
+            </div>
+            <div class="timer-form">
+                <div class="form-group">
+                    <label for="timer-subject-input">Subject</label>
+                    <input type="text" id="timer-subject-input" placeholder="e.g., Mathematics">
+                </div>
+                <div class="form-group">
+                    <label for="timer-topic-input">Topic</label>
+                    <input type="text" id="timer-topic-input" placeholder="e.g., Calculus">
+                </div>
+                <button id="timer-save" class="btn-primary">Save Session</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="common.js"></script>
+</body>
+</html>
